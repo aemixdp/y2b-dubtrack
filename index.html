@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="index.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <style>
+        html, body { margin: 0; height: 100%; }
+        * { text-align: center; }
+        button { width: 180px; margin-top: 6px; margin-bottom: 6px; }
+        button:enabled:hover { cursor: pointer; }
+        #errors a { color: red; }
+        #results { text-align: left; }
+    </style>
+</head>
+<body>
+    <button id="authorize"
+            disabled="true">
+        authorize
+    </button>
+    <br>
+    <input id="playlist"
+           type="text"
+           size="30"
+           placeholder="playlist id"
+           disabled="true">
+    <br>
+    <button id="generate"
+            disabled="true"
+            onclick="generate()">
+        generate import code
+    </button>
+    <br>
+    <textarea id="results"></textarea>
+</body>
+</html>
