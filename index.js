@@ -66,16 +66,21 @@ var IMPORT_CODE_TEMPLATE = "(" + (function () {
             return;
         }
         $.post(songs_url, {
-            fkid: traxx.pop(),
+            fkid: traxx[traxx.length-1],
             type: "youtube"
-        }, function () {
+        }).done(function () {
+            traxx.pop();
             console.log("track imported! " + traxx.length + " left...");
+            push_traxx();
+        }).fail(function () {
+            console.log("error! retrying...");
             push_traxx();
         });
     }
 }).toString() + ")();";
 
 function generate () {
+    document.body.style.cursor = 'wait';
     var playlistId = $("#playlist").val();
     loadClient.then(function () {
         return getVideos(playlistId);
@@ -89,6 +94,7 @@ function generate () {
                     .replace("TITLE", response.items[0].snippet.title)
                     .replace("TRACK_IDS", JSON.stringify(videos))
             );
+            document.body.style.cursor = 'default';
         });
     });
 }
