@@ -66,14 +66,13 @@ var IMPORT_CODE_TEMPLATE = "(" + (function () {
             return;
         }
         $.post(songs_url, {
-            fkid: traxx[traxx.length-1],
+            fkid: traxx.pop(),
             type: "youtube"
         }).done(function () {
-            traxx.pop();
             console.log("track imported! " + traxx.length + " left...");
             push_traxx();
         }).fail(function () {
-            console.log("error! retrying...");
+            console.log("error! skipping...");
             push_traxx();
         });
     }
